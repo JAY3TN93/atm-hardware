@@ -65,6 +65,28 @@ function ATMHardwareService(){
     }
   };
 
+  this.setDeviceFitness = function(device_name, fitness){
+    var device = this.devices[device_name];
+    if(device){
+      switch(fitness){
+        case 'No error':
+        case 'Routine errors have occurred':
+        case 'Warning conditions have occurred':
+        case 'Suspend':
+        case 'Fatal error condition exists':
+          device.fitness = fitness;
+          break;
+        default:
+          console.log('Unsupported fitnes severity value: ' + fitness);
+          break;
+      }
+
+      return true;
+    }
+
+    return false;
+  };
+
 
   /**
    * [getDeviceFitness description]

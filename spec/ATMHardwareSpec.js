@@ -76,8 +76,10 @@ describe('ATMHardwareService', function(){
       hw.init();
     });
 
-    it('should get device fitness severity value', function(){
+    it('should set device fitness severity value', function(){
       expect(hw.getDeviceFitness('Journal Paper')).toEqual('No error');
+      expect(hw.setDeviceFitness('Journal Paper', 'Routine errors have occurred')).toBeTruthy();
+      expect(hw.getDeviceFitness('Journal Paper')).toEqual('Routine errors have occurred');
     })
   });  
 
