@@ -1,6 +1,6 @@
 {
   "name": "atm-hardware-buffer",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "ATM Hardware service",
   "main": "atmhardware.js",
   "scripts": {
