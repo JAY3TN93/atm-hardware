@@ -4,11 +4,28 @@ function ATMHardwareService(){
 
   this.init = function(){
     [
+      'High Order Communication',
+      'System Disk',
+      'Magnetic Card Reader',
+      'Cash Handler',
+      'Depository',
+      'Encryptor',
+      'Security Camera',
+      'Door Access',
+      'Flex Disk',
+      'Statement Printer',
+      'Signage Display',
+      'System Display',
+      'Media Entry Indicators',
+      'Coin Dispensing Module Tamper Indication',
+      'Voice Guidance System',
+      'Bunch Note Acceptor',
+      'Cheque Processor',
       'Card Capture Bin',
       'Cash Handler Reject Bin',
       'Deposit Bin',
-      'Receipt Paper',
-      'Journal Paper',
+      'Receipt Printer',
+      'Journal Printer',
       'Night Safe',
       'Cassette 1',
       'Cassette 2',
@@ -65,6 +82,11 @@ function ATMHardwareService(){
     }
   };
 
+  /**
+   * [setDeviceFitness description]
+   * @param {[type]} device_name [description]
+   * @param {[type]} fitness     [description]
+   */
   this.setDeviceFitness = function(device_name, fitness){
     var device = this.devices[device_name];
     if(device){
@@ -101,6 +123,10 @@ function ATMHardwareService(){
     }
   };
 
+  /**
+   * [getSuppliesStatus description]
+   * @return {[type]} [description]
+   */
   this.getSuppliesStatus = function(){
     var status = '';
 
@@ -111,8 +137,8 @@ function ATMHardwareService(){
       'Card Capture Bin',
       'Cash Handler Reject Bin',
       'Deposit Bin',
-      'Receipt Paper',
-      'Journal Paper',
+      'Receipt Printer',
+      'Journal Printer',
       'Not used',
       'Not used',
       'Night Safe',
@@ -169,6 +195,79 @@ function ATMHardwareService(){
     });
 
     return status;
+  };
+
+  this.getHardwareFitness = function(){
+    var hw_fitness = '';
+    [
+      'Time‐of‐Day Clock',
+      'High Order Communication',
+      'System Disk',
+      'Magnetic Card Reader',
+      'Cash Handler',
+      'Depository',
+      'Receipt Printer',
+      'Journal Printer',
+      'Reserved',
+      'Reserved',
+      'Night Safe',
+      'Encryptor',
+      'Security Camera',
+      'Door Access',
+      'Flex Disk',
+      'Cassette 1',
+      'Cassette 2',
+      'Cassette 3',
+      'Cassette 4',
+      'Reserved',
+      'Reserved',
+      'Statement Printer',
+      'Signage Display',
+      'Reserved',
+      'Reserved',
+      'System Display',
+      'Media Entry Indicators',
+      'Envelope Dispenser',
+      'Not supported',
+      'Coin Dispensing Module Tamper Indication',
+      'Not supported',
+      'Reserved',
+      'Voice Guidance System',
+      'Reserved',
+      'Bunch Note Acceptor',
+      'Cheque Processor',
+      'Not supported',
+      'Reserved',
+    ].forEach(device => {
+      var fitness = this.getDeviceFitness(device);
+      switch(fitness){
+        case 'No error':
+          hw_fitness += '0';
+          break;
+
+        case 'Routine errors have occurred':
+          hw_fitness += '1';
+          break;
+
+        case 'Warning conditions have occurred':
+          hw_fitness += '2';
+          break;
+
+        case 'Suspend':
+          hw_fitness += '3';
+          break;
+
+        case 'Fatal error condition exists':
+          hw_fitness += '4';
+          break;
+          
+        default:
+          hw_fitness += '0';
+          break;
+      }
+    });
+
+    return hw_fitness;
   };
 
   this.getSuppliesDescription = function(){
