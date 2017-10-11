@@ -25,6 +25,11 @@ function ATMHardwareService(){
     });
   };
 
+  /**
+   * [setDeviceSupply description]
+   * @param {[type]} device_name [description]
+   * @param {[type]} supply      [description]
+   */
   this.setDeviceSupply = function(device_name, supply){
     var device = this.devices[device_name];
     if(device){
@@ -40,14 +45,37 @@ function ATMHardwareService(){
           console.log('Unsupported supply status value: ' + supply);
           break;
       }
+
+      return true;
     }
+
+    return false;
   };
 
+  /**
+   * [getDeviceSupply description]
+   * @param  {[type]} name [description]
+   * @return {[type]}      [description]
+   */
   this.getDeviceSupply = function(name){
     var device = this.devices[name];
 
     if(device){
       return device.supply;
+    }
+  };
+
+
+  /**
+   * [getDeviceFitness description]
+   * @param  {[type]} name [description]
+   * @return {[type]}      [description]
+   */
+  this.getDeviceFitness = function(name){
+    var device = this.devices[name];
+
+    if(device){
+      return device.fitness;
     }
   };
 
@@ -119,6 +147,10 @@ function ATMHardwareService(){
     });
 
     return status;
+  };
+
+  this.getSuppliesDescription = function(){
+    var description = {};
   };
 
 

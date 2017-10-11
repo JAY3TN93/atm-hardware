@@ -10,6 +10,7 @@ describe('ATMHardwareService', function(){
     it('should get init devices', function(){
       expect(hw.devices).toEqual({});
       hw.init();
+
       var devices = {
         'Card Capture Bin': { supply: 'Not configured', fitness: 'No error' },
         'Cash Handler Reject Bin': { supply: 'Not configured', fitness: 'No error' },
@@ -47,18 +48,38 @@ describe('ATMHardwareService', function(){
 
     it('should set supply status string', function(){
       expect(hw.getDeviceSupply('Cassette 1')).toEqual('Not configured');
-      hw.setDeviceSupply('Cassette 1', 'Good state');
+      expect(hw.setDeviceSupply('Cassette 1', 'Good state')).toBeTruthy();
       expect(hw.getDeviceSupply('Cassette 1')).toEqual('Good state');
     });
   });
 
 
   describe('getSuppliesStatus()', function(){
+    beforeEach(function() {
+      hw.init();
+    });
+
     it('should get supply status string', function(){
       expect(hw.getSuppliesStatus().length).toEqual(26);
       expect(hw.getSuppliesStatus()).toEqual('00000000000000000000000000');
+
+      expect(hw.setDeviceSupply('Cassette 1', 'Good state')).toBeTruthy();
+      expect(hw.setDeviceSupply('Cassette 2', 'Media low')).toBeTruthy();
+      expect(hw.setDeviceSupply('Cassette 3', 'Media out')).toBeTruthy();
+      expect(hw.setDeviceSupply('Cassette 4', 'Overfill')).toBeTruthy();
+      expect(hw.getSuppliesStatus()).toEqual('00000000000000012340000000');
     });
   });
+
+  describe('setDeviceFitness()', function(){
+    beforeEach(function() {
+      hw.init();
+    });
+
+    it('should get device fitness severity value', function(){
+      expect(hw.getDeviceFitness('Journal Paper')).toEqual('No error');
+    })
+  });  
 
   describe('getReleaseNumber()', function(){
     it('should get release number', function(){
