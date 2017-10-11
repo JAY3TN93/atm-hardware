@@ -11,31 +11,44 @@ describe('ATMHardwareService', function(){
       expect(hw.devices).toEqual({});
       hw.init();
       var devices = {
-        'Card Capture Bin': { supply: 'Not configured' },
-        'Cash Handler Reject Bin': { supply: 'Not configured' },
-        'Deposit Bin': { supply: 'Not configured' },
-        'Receipt Paper': { supply: 'Not configured' },
-        'Journal Paper': { supply: 'Not configured' },
-        'Night Safe': { supply: 'Not configured' },
-        'Cassettes 1': { supply: 'Not configured' },
-        'Cassettes 2': { supply: 'Not configured' },
-        'Cassettes 3': { supply: 'Not configured' },
-        'Cassettes 4': { supply: 'Not configured' },
-        'Statement Paper': { supply: 'Not configured' },
-        'Statement Ribbon': { supply: 'Not configured'},
-        'Envelope Dispenser': { supply: 'Not configured'}
+        'Card Capture Bin': { supply: 'Not configured', fitness: 'No error' },
+        'Cash Handler Reject Bin': { supply: 'Not configured', fitness: 'No error' },
+        'Deposit Bin': { supply: 'Not configured', fitness: 'No error' },
+        'Receipt Paper': { supply: 'Not configured', fitness: 'No error' },
+        'Journal Paper': { supply: 'Not configured', fitness: 'No error' },
+        'Night Safe': { supply: 'Not configured', fitness: 'No error' },
+        'Cassette 1': { supply: 'Not configured', fitness: 'No error' },
+        'Cassette 2': { supply: 'Not configured', fitness: 'No error' },
+        'Cassette 3': { supply: 'Not configured', fitness: 'No error' },
+        'Cassette 4': { supply: 'Not configured', fitness: 'No error' },
+        'Statement Paper': { supply: 'Not configured', fitness: 'No error' },
+        'Statement Ribbon': { supply: 'Not configured', fitness: 'No error'},
+        'Envelope Dispenser': { supply: 'Not configured', fitness: 'No error'}
       }
       expect(hw.devices).toEqual(devices);
     });
   });
 
-  describe('getDeviceSupplyValue()', function(){
+  describe('getDeviceSupply()', function(){
     beforeEach(function() {
       hw.init();
     });
 
     it('should get Card Capture Bin deive status', function(){
-      expect(hw.getDeviceSupplyValue('Card Capture Bin')).toEqual('Not configured');
+      expect(hw.getDeviceSupply('Card Capture Bin')).toEqual('Not configured');
+    });
+  });
+
+
+  describe('setDeviceSupply()', function(){
+    beforeEach(function() {
+      hw.init();
+    });
+
+    it('should set supply status string', function(){
+      expect(hw.getDeviceSupply('Cassette 1')).toEqual('Not configured');
+      hw.setDeviceSupply('Cassette 1', 'Good state');
+      expect(hw.getDeviceSupply('Cassette 1')).toEqual('Good state');
     });
   });
 

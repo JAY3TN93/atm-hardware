@@ -10,21 +10,40 @@ function ATMHardwareService(){
       'Receipt Paper',
       'Journal Paper',
       'Night Safe',
-      'Cassettes 1',
-      'Cassettes 2',
-      'Cassettes 3',
-      'Cassettes 4',
+      'Cassette 1',
+      'Cassette 2',
+      'Cassette 3',
+      'Cassette 4',
       'Statement Paper',
       'Statement Ribbon',
       'Envelope Dispenser'
     ].forEach(device => {
       this.devices[device] = {
         supply: 'Not configured',
+        fitness: 'No error'
       };
     });
   };
 
-  this.getDeviceSupplyValue = function(name){
+  this.setDeviceSupply = function(device_name, supply){
+    var device = this.devices[device_name];
+    if(device){
+      switch(supply){
+        case 'Not configured':
+        case 'Good state':
+        case 'Media low':
+        case 'Media out':
+        case 'Overfill':
+          device.supply = supply;
+          break;
+        default:
+          console.log('Unsupported supply status value: ' + supply);
+          break;
+      }
+    }
+  };
+
+  this.getDeviceSupply = function(name){
     var device = this.devices[name];
 
     if(device){
@@ -51,10 +70,10 @@ function ATMHardwareService(){
       'Not used',
       'Not used',
       'Not used',
-      'Cassettes 1',
-      'Cassettes 2',
-      'Cassettes 3',
-      'Cassettes 4',
+      'Cassette 1',
+      'Cassette 2',
+      'Cassette 3',
+      'Cassette 4',
       'Not used',
       'Not used',
       'Statement Paper',
@@ -70,7 +89,7 @@ function ATMHardwareService(){
           break;
 
         default: 
-          switch(this.getDeviceSupplyValue(device)){
+          switch(this.getDeviceSupply(device)){
             case 'Not configured':
               status += '0';
               break;
