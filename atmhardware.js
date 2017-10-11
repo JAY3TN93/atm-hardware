@@ -16,16 +16,19 @@ function ATMHardwareService(){
       'Cassettes 4',
       'Statement Paper',
       'Statement Ribbon',
+      'Envelope Dispenser'
     ].forEach(device => {
-      this.devices[device] = {state: 'Not configured'};
+      this.devices[device] = {
+        supply: 'Not configured',
+      };
     });
   };
 
-  this.getDeviceSupplyStatus = function(name){
+  this.getDeviceSupplyValue = function(name){
     var device = this.devices[name];
 
     if(device){
-      return device.state;
+      return device.supply;
     }
   };
 
@@ -37,15 +40,61 @@ function ATMHardwareService(){
       'Reserved',
       'Not used',
       'Card Capture Bin',
+      'Cash Handler Reject Bin',
+      'Deposit Bin',
+      'Receipt Paper',
+      'Journal Paper',
+      'Not used',
+      'Not used',
+      'Night Safe',
+      'Not used',
+      'Not used',
+      'Not used',
+      'Not used',
+      'Cassettes 1',
+      'Cassettes 2',
+      'Cassettes 3',
+      'Cassettes 4',
+      'Not used',
+      'Not used',
+      'Statement Paper',
+      'Statement Ribbon',
+      'Reserved',
+      'Reserved',
+      'Envelope Dispenser'
     ].forEach(device => {
       switch(device){
         case 'Reserved':
         case 'Not used':
-          status += 0;
+          status += '0';
           break;
 
         default: 
-          status += this.getDeviceSupplyStatus(device);
+          switch(this.getDeviceSupplyValue(device)){
+            case 'Not configured':
+              status += '0';
+              break;
+
+            case 'Good state':
+              status += '1';
+              break;
+
+            case 'Media low':
+              status += '2';
+              break;
+
+            case 'Media out':
+              status += '3';
+              break;
+
+            case 'Overfill':
+              status += '4';
+              break;
+
+            default:
+              status += '0';
+              break;
+          }
           break;
       }
     });

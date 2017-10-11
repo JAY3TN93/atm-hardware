@@ -11,33 +11,39 @@ describe('ATMHardwareService', function(){
       expect(hw.devices).toEqual({});
       hw.init();
       var devices = {
-        'Card Capture Bin': { state: 'Not configured' },
-        'Cash Handler Reject Bin': { state: 'Not configured' },
-        'Deposit Bin': { state: 'Not configured' },
-        'Receipt Paper': { state: 'Not configured' },
-        'Journal Paper': { state: 'Not configured' },
-        'Night Safe': { state: 'Not configured' },
-        'Cassettes 1': { state: 'Not configured' },
-        'Cassettes 2': { state: 'Not configured' },
-        'Cassettes 3': { state: 'Not configured' },
-        'Cassettes 4': { state: 'Not configured' },
-        'Statement Paper': { state: 'Not configured' },
-        'Statement Ribbon': { state: 'Not configured'}
+        'Card Capture Bin': { supply: 'Not configured' },
+        'Cash Handler Reject Bin': { supply: 'Not configured' },
+        'Deposit Bin': { supply: 'Not configured' },
+        'Receipt Paper': { supply: 'Not configured' },
+        'Journal Paper': { supply: 'Not configured' },
+        'Night Safe': { supply: 'Not configured' },
+        'Cassettes 1': { supply: 'Not configured' },
+        'Cassettes 2': { supply: 'Not configured' },
+        'Cassettes 3': { supply: 'Not configured' },
+        'Cassettes 4': { supply: 'Not configured' },
+        'Statement Paper': { supply: 'Not configured' },
+        'Statement Ribbon': { supply: 'Not configured'},
+        'Envelope Dispenser': { supply: 'Not configured'}
       }
       expect(hw.devices).toEqual(devices);
     });
-  });  
+  });
 
-  describe('getDeviceSupplyStatus()', function(){
+  describe('getDeviceSupplyValue()', function(){
+    beforeEach(function() {
+      hw.init();
+    });
+
     it('should get Card Capture Bin deive status', function(){
-      //expect(hw.getDeviceSupplyStatus('Card Capture Bin')).toEqual('Not configured');
+      expect(hw.getDeviceSupplyValue('Card Capture Bin')).toEqual('Not configured');
     });
   });
 
 
   describe('getSuppliesStatus()', function(){
     it('should get supply status string', function(){
-      //expect(hw.getSuppliesStatus()).toEqual('00011111001000011130011');
+      expect(hw.getSuppliesStatus().length).toEqual(26);
+      expect(hw.getSuppliesStatus()).toEqual('00000000000000000000000000');
     });
   });
 
