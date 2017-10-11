@@ -109,6 +109,7 @@ describe('ATMHardwareService', function(){
       expect(hw.getHardwareFitness().length).toEqual(38);
       expect(hw.getHardwareFitness()).toEqual('00000000000000000000000000000000000000');
 
+      expect(hw.setDeviceFitness('Magnetic Card Reader', 'Fatal error condition exists')).toBeTruthy();
       expect(hw.setDeviceFitness('Journal Printer', 'Routine errors have occurred')).toBeTruthy();
       expect(hw.setDeviceFitness('Cash Handler', 'Warning conditions have occurred')).toBeTruthy();
       expect(hw.setDeviceFitness('Cassette 1', 'Fatal error condition exists')).toBeTruthy();
@@ -116,7 +117,6 @@ describe('ATMHardwareService', function(){
       expect(hw.setDeviceFitness('Cassette 3', 'Warning conditions have occurred')).toBeTruthy();
       expect(hw.setDeviceFitness('Cassette 4', 'Routine errors have occurred')).toBeTruthy();
       expect(hw.setDeviceFitness('Bunch Note Acceptor', 'Suspend')).toBeTruthy();
-      expect(hw.setDeviceFitness('Magnetic Card Reader', 'Fatal error condition exists')).toBeTruthy();
       
       expect(hw.getHardwareFitness()).toEqual('00042001000000043210000000000000003000');
     })

@@ -1,12 +1,12 @@
 {
-  "name": "atm-hardware-buffer",
-  "version": "0.1.9",
+  "name": "atm-hardware",
+  "version": "0.2.0",
   "description": "ATM Hardware service",
   "main": "atmhardware.js",
   "scripts": {
     "test": "istanbul cover jasmine"
   },
-  "repository": "https://github.com/timgabets/atm-opcode-buffer",
+  "repository": "https://github.com/timgabets/atm-hardware",
   "keywords": [
     "ATM",
     "Hardware"

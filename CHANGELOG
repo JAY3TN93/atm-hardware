@@ -1,4 +1,5 @@
 October 2017
+	0.2.0	fixed npm module name ('atm-hardware')
 	0.1.9 	getHardwareFitness()
 	0.1.8 	setDeviceFitness()
 	0.1.7 	setDeviceFitness()
