@@ -8,7 +8,7 @@ describe('ATMHardwareService', function(){
 
   describe('getHarwareID()', function(){
     it('should get NDC hardware ID', function(){
-      expect(hw.getHarwareID()).toEqual('');
+      expect(hw.getHarwareID()).toEqual('G531‐0283');
     })
   });
 });
