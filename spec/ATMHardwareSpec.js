@@ -76,22 +76,22 @@ describe('ATMHardwareService', function(){
         'Journal Printer': { supply: 'Not configured', fitness: 'No error' },
         'Night Safe': { supply: 'Not configured', fitness: 'No error' },
         'Cassette 1': { 
-          supply: 'Not configured', 
+          supply: 'Good state', 
           fitness: 'No error',
           counters: { loaded: 0, dispensed: 0, rejected: 0 }
         },
         'Cassette 2': { 
-          supply: 'Not configured', 
+          supply: 'Good state', 
           fitness: 'No error',
           counters: { loaded: 0, dispensed: 0, rejected: 0 }
         },
         'Cassette 3': { 
-          supply: 'Not configured', 
+          supply: 'Good state', 
           fitness: 'No error',
           counters: { loaded: 0, dispensed: 0, rejected: 0 }
         },
         'Cassette 4': { 
-          supply: 'Not configured', 
+          supply: 'Good state', 
           fitness: 'No error',
           counters: { loaded: 0, dispensed: 0, rejected: 0 }
         },
@@ -120,9 +120,9 @@ describe('ATMHardwareService', function(){
     });
 
     it('should set supply status string', function(){
-      expect(hw.getDeviceSupply('Cassette 1')).toEqual('Not configured');
-      expect(hw.setDeviceSupply('Cassette 1', 'Good state')).toBeTruthy();
       expect(hw.getDeviceSupply('Cassette 1')).toEqual('Good state');
+      expect(hw.setDeviceSupply('Cassette 1', 'Overfill')).toBeTruthy();
+      expect(hw.getDeviceSupply('Cassette 1')).toEqual('Overfill');
     });
   });
 
@@ -134,13 +134,13 @@ describe('ATMHardwareService', function(){
 
     it('should get supply status string', function(){
       expect(hw.getSuppliesStatus().length).toEqual(26);
-      expect(hw.getSuppliesStatus()).toEqual('00000000000000000000000000');
+      expect(hw.getSuppliesStatus()).toEqual('00000000000000011110000000');
 
-      expect(hw.setDeviceSupply('Cassette 1', 'Good state')).toBeTruthy();
-      expect(hw.setDeviceSupply('Cassette 2', 'Media low')).toBeTruthy();
+      expect(hw.setDeviceSupply('Cassette 1', 'Media low')).toBeTruthy();
+      expect(hw.setDeviceSupply('Cassette 2', 'Not configured')).toBeTruthy();
       expect(hw.setDeviceSupply('Cassette 3', 'Media out')).toBeTruthy();
       expect(hw.setDeviceSupply('Cassette 4', 'Overfill')).toBeTruthy();
-      expect(hw.getSuppliesStatus()).toEqual('00000000000000012340000000');
+      expect(hw.getSuppliesStatus()).toEqual('00000000000000020340000000');
     });
   });
 

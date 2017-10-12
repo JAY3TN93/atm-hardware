@@ -1,4 +1,5 @@
 October 2017
+	0.2.3 	initiailzing cassettes with Good state supply
 	0.2.2 	initializing cassette counters during init()
 	0.2.1 	initCassetteCounters()
 	0.2.0	fixed npm module name ('atm-hardware')

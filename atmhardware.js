@@ -2,6 +2,10 @@ function ATMHardwareService(){
   
   this.devices = {};
 
+  /**
+   * [init description]
+   * @return {[type]} [description]
+   */
   this.init = function(){
     [
       'High Order Communication',
@@ -35,15 +39,28 @@ function ATMHardwareService(){
       'Statement Ribbon',
       'Envelope Dispenser'
     ].forEach(device => {
-      this.devices[device] = {
-        supply: 'Not configured',
-        fitness: 'No error'
-      };
+      switch(device){
+        case 'Cassette 1':
+        case 'Cassette 2':
+        case 'Cassette 3':
+        case 'Cassette 4':
+          this.devices[device] = { supply: 'Good state', fitness: 'No error' };
+          break;
+        default:
+          this.devices[device] = { supply: 'Not configured', fitness: 'No error' };
+      }
     });
 
     this.initCassetteCounters();
   };
 
+  /**
+   * [initCassetteCounters description]
+   * @param  {[type]} loaded    [description]
+   * @param  {[type]} dispensed [description]
+   * @param  {[type]} rejected  [description]
+   * @return {[type]}           [description]
+   */
   this.initCassetteCounters = function(loaded, dispensed, rejected){
     if(loaded === undefined)
       loaded = 0;

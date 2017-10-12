@@ -1,6 +1,6 @@
 {
   "name": "atm-hardware",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "ATM Hardware service",
   "main": "atmhardware.js",
   "scripts": {
