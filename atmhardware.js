@@ -54,17 +54,8 @@ function ATMHardwareService(){
     if(rejected === undefined)
       rejected = 0;
 
-    [
-      'Cassette 1',
-      'Cassette 2',
-      'Cassette 3',
-      'Cassette 4'
-    ].forEach(cassette => {
-      this.devices[cassette].counters = {
-        'loaded': loaded,
-        'dispensed': dispensed,
-        'rejected': rejected
-      };
+    [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4' ].forEach(cassette => {
+      this.devices[cassette].counters = { 'loaded': loaded, 'dispensed': dispensed, 'rejected': rejected };
     });
   };
 
