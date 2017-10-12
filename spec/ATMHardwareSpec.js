@@ -6,6 +6,46 @@ describe('ATMHardwareService', function(){
     hw = new ATMHardwareService();
   });
 
+  describe('initCassetteCounters()', function(){
+    it('should init cassette counters with default values', function(){
+      hw.devices = {
+        'Cassette 1': {},
+        'Cassette 2': {},
+        'Cassette 3': {},
+        'Cassette 4': {},
+      };
+
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toBeUndefined();
+      });
+
+      hw.initCassetteCounters();
+
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toEqual({ 'loaded': 0, 'dispensed': 0, 'rejected': 0 }); 
+      });
+    });
+
+    it('should init cassette counters with non-default values', function(){
+      hw.devices = {
+        'Cassette 1': {},
+        'Cassette 2': {},
+        'Cassette 3': {},
+        'Cassette 4': {},
+      };
+
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toBeUndefined();
+      });
+
+      hw.initCassetteCounters(5000, 7, 2);
+
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toEqual({ 'loaded': 5000, 'dispensed': 7, 'rejected': 2 }); 
+      });
+    });
+  });
+
   describe('init()', function(){
     it('should get init devices', function(){
       expect(hw.devices).toEqual({});
@@ -35,10 +75,26 @@ describe('ATMHardwareService', function(){
         'Receipt Printer': { supply: 'Not configured', fitness: 'No error' },
         'Journal Printer': { supply: 'Not configured', fitness: 'No error' },
         'Night Safe': { supply: 'Not configured', fitness: 'No error' },
-        'Cassette 1': { supply: 'Not configured', fitness: 'No error' },
-        'Cassette 2': { supply: 'Not configured', fitness: 'No error' },
-        'Cassette 3': { supply: 'Not configured', fitness: 'No error' },
-        'Cassette 4': { supply: 'Not configured', fitness: 'No error' },
+        'Cassette 1': { 
+          supply: 'Not configured', 
+          fitness: 'No error',
+          counters: { loaded: 0, dispensed: 0, rejected: 0 }
+        },
+        'Cassette 2': { 
+          supply: 'Not configured', 
+          fitness: 'No error',
+          counters: { loaded: 0, dispensed: 0, rejected: 0 }
+        },
+        'Cassette 3': { 
+          supply: 'Not configured', 
+          fitness: 'No error',
+          counters: { loaded: 0, dispensed: 0, rejected: 0 }
+        },
+        'Cassette 4': { 
+          supply: 'Not configured', 
+          fitness: 'No error',
+          counters: { loaded: 0, dispensed: 0, rejected: 0 }
+        },
         'Statement Paper': { supply: 'Not configured', fitness: 'No error' },
         'Statement Ribbon': { supply: 'Not configured', fitness: 'No error'},
         'Envelope Dispenser': { supply: 'Not configured', fitness: 'No error'}
@@ -132,45 +188,5 @@ describe('ATMHardwareService', function(){
     it('should get NDC hardware ID', function(){
       expect(hw.getHarwareID()).toEqual('G531‐0283');
     })
-  });
-
-  describe('initCassetteCounters()', function(){
-    it('should init cassette counters with default values', function(){
-      hw.devices = {
-        'Cassette 1': {},
-        'Cassette 2': {},
-        'Cassette 3': {},
-        'Cassette 4': {},
-      };
-
-      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
-        expect(hw.devices[cassette].counters).toBeUndefined();
-      });
-
-      hw.initCassetteCounters();
-
-      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
-        expect(hw.devices[cassette].counters).toEqual({ 'loaded': 0, 'dispensed': 0, 'rejected': 0 }); 
-      });
-    });
-
-    it('should init cassette counters with non-default values', function(){
-      hw.devices = {
-        'Cassette 1': {},
-        'Cassette 2': {},
-        'Cassette 3': {},
-        'Cassette 4': {},
-      };
-
-      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
-        expect(hw.devices[cassette].counters).toBeUndefined();
-      });
-
-      hw.initCassetteCounters(5000, 7, 2);
-
-      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
-        expect(hw.devices[cassette].counters).toEqual({ 'loaded': 5000, 'dispensed': 7, 'rejected': 2 }); 
-      });
-    });
   });
 });

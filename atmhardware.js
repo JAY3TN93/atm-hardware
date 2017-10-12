@@ -41,6 +41,7 @@ function ATMHardwareService(){
       };
     });
 
+    this.initCassetteCounters();
   };
 
   this.initCassetteCounters = function(loaded, dispensed, rejected){
