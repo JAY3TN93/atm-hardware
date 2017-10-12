@@ -143,19 +143,34 @@ describe('ATMHardwareService', function(){
         'Cassette 4': {},
       };
 
-      expect(hw.devices['Cassette 1'].counters).toBeUndefined();
-      expect(hw.devices['Cassette 2'].counters).toBeUndefined();
-      expect(hw.devices['Cassette 3'].counters).toBeUndefined();
-      expect(hw.devices['Cassette 4'].counters).toBeUndefined();
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toBeUndefined();
+      });
 
       hw.initCassetteCounters();
 
-      var cassette1_counters = hw.devices['Cassette 1'].counters;
-      expect(cassette1_counters).toEqual({
-        'loaded': 0,
-        'dispensed': 0,
-        'rejected': 0
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toEqual({ 'loaded': 0, 'dispensed': 0, 'rejected': 0 }); 
       });
-    })
+    });
+
+    it('should init cassette counters with non-default values', function(){
+      hw.devices = {
+        'Cassette 1': {},
+        'Cassette 2': {},
+        'Cassette 3': {},
+        'Cassette 4': {},
+      };
+
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toBeUndefined();
+      });
+
+      hw.initCassetteCounters(5000, 7, 2);
+
+      [ 'Cassette 1', 'Cassette 2', 'Cassette 3', 'Cassette 4'].forEach(cassette => {
+        expect(hw.devices[cassette].counters).toEqual({ 'loaded': 5000, 'dispensed': 7, 'rejected': 2 }); 
+      });
+    });
   });
 });
