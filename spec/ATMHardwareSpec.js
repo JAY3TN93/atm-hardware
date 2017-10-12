@@ -133,4 +133,29 @@ describe('ATMHardwareService', function(){
       expect(hw.getHarwareID()).toEqual('G531‐0283');
     })
   });
+
+  describe('initCassetteCounters()', function(){
+    it('should init cassette counters with default values', function(){
+      hw.devices = {
+        'Cassette 1': {},
+        'Cassette 2': {},
+        'Cassette 3': {},
+        'Cassette 4': {},
+      };
+
+      expect(hw.devices['Cassette 1'].counters).toBeUndefined();
+      expect(hw.devices['Cassette 2'].counters).toBeUndefined();
+      expect(hw.devices['Cassette 3'].counters).toBeUndefined();
+      expect(hw.devices['Cassette 4'].counters).toBeUndefined();
+
+      hw.initCassetteCounters();
+
+      var cassette1_counters = hw.devices['Cassette 1'].counters;
+      expect(cassette1_counters).toEqual({
+        'loaded': 0,
+        'dispensed': 0,
+        'rejected': 0
+      });
+    })
+  });
 });

@@ -40,6 +40,31 @@ function ATMHardwareService(){
         fitness: 'No error'
       };
     });
+
+  };
+
+  this.initCassetteCounters = function(loaded, dispensed, rejected){
+    if(loaded === undefined)
+      loaded = 0;
+
+    if(dispensed === undefined)
+      dispensed = 0;
+
+    if(rejected === undefined)
+      rejected = 0;
+
+    [
+      'Cassette 1',
+      'Cassette 2',
+      'Cassette 3',
+      'Cassette 4'
+    ].forEach(cassette => {
+      this.devices[cassette].counters = {
+        'loaded': loaded,
+        'dispensed': dispensed,
+        'rejected': rejected
+      };
+    });
   };
 
   /**
